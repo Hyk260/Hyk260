@@ -13,7 +13,9 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-<h1 align="center">Hi 👋, I'm YongKang</h1>
+<div align="center">
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=5CA4F7&random=false&width=435&lines=console.log(%22Hello+World%22);Hi+%F0%9F%91%8B%2C+I'm+YongKang" alt="Typing SVG" /></a>
+</div>
 
 ### 🧠 Languages and Tools:
 
