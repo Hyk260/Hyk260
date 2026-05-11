@@ -19,13 +19,15 @@ jobs:
         uses: Platane/snk@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          output: output/github-contribution-grid-snake.svg
+          github_user_name: ${{ github.repository_owner }}
+          outputs: output/github-contribution-grid-snake.svg
 
       - name: Generate dark mode snake
         uses: Platane/snk@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          output: output/github-contribution-grid-snake-dark.svg
+          github_user_name: ${{ github.repository_owner }}
+          outputs: output/github-contribution-grid-snake-dark.svg
           palette: github-dark
 
       - name: Push changes
