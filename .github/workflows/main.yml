@@ -1,0 +1,35 @@
+name: Snake Contribution
+
+on:
+  schedule:
+    # 每周一凌晨 00:00 UTC 更新一次
+    - cron: "0 0 * * 1"
+    # 每日更新
+    # - cron: "0 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate snake
+        uses: Platane/snk@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          output: output/github-contribution-grid-snake.svg
+
+      - name: Generate dark mode snake
+        uses: Platane/snk@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          output: output/github-contribution-grid-snake-dark.svg
+          palette: github-dark
+
+      - name: Push changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "Update snake contribution grid"
+          add: output/
