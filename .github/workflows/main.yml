@@ -8,28 +8,34 @@ on:
     # - cron: "0 0 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+concurrency:
+  group: snake-contribution
+  cancel-in-progress: true
+
 jobs:
-  build:
+  generate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate snake
+      - name: Generate snake SVGs
         uses: Platane/snk@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          output: output/github-contribution-grid-snake.svg
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
 
-      - name: Generate dark mode snake
-        uses: Platane/snk@v3
+      - name: Deploy to output branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          output: output/github-contribution-grid-snake-dark.svg
-          palette: github-dark
-
-      - name: Push changes
-        uses: EndBug/add-and-commit@v9
-        with:
-          message: "Update snake contribution grid"
-          add: output/
+          publish_dir: ./dist
+          publish_branch: output
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
+          commit_message: "chore: update contribution snake [skip ci]"
